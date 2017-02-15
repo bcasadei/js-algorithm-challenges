@@ -1,12 +1,13 @@
 // Check if the predicate (second argument) is truthy on all elements of a collection (first argument).
-// Remember, you can access object properties through either dot notation or [] notation.
 
 function truthCheck(collection, pre) {
-  collection.forEach(function(obj) {
-    if(obj[pre] === undefined) {
-      return false;
+  function isTruthy(elm, idx, arr) {
+    var x = Boolean(elm[pre]);
+    if(x) {
+      return elm.hasOwnProperty(pre)
     }
-  });
+  }
+  return collection.every(isTruthy);
 }
 
-console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po"}], "sex"));
+console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age"));
